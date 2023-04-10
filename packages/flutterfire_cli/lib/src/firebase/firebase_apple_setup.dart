@@ -584,51 +584,10 @@ end
           );
         }
       }
-
-      if (buildConfiguration != null) {
-        await _createBuildConfigurationSetup(fullPathToServiceFile!);
-      } else if (target != null) {
-        await _createTargetSetup(fullPathToServiceFile!);
-      } else {
-        // User has specified an output for service file. We need to prompt user whether they
-        // want a build configuration, a target configured or to simply write to the path provided
-        final fileName = path.basename(fullPathToServiceFile!);
-        final response = promptSelect(
-          'Would you like your $platform $fileName to be associated with your $platform Build configuration or Target (use arrow keys & space to select)?',
-          [
-            'Build configuration',
-            'Target',
-            'No, I want to write the file to the path I chose'
-          ],
-        );
-
-        // Add to build configuration
-        if (response == 0) {
-          final buildConfigurations = await _findBuildConfigurationsAvailable();
-
-          final response = promptSelect(
-            'Which build configuration would you like your $platform $fileName to be included within your $platform app bundle?',
-            buildConfigurations,
-          );
-
-          buildConfiguration = buildConfigurations[response];
-          await _buildConfigurationWrites(fullPathToServiceFile!);
-
-          // Add to target
-        } else if (response == 1) {
-          final targets = await _findTargetsAvailable();
-
-          final response = promptSelect(
-            'Which target would you like your $platform $fileName to be included within your $platform app bundle?',
-            targets,
-          );
-          target = targets[response];
-          await _targetWrites(fullPathToServiceFile!);
-        } else {
-          // Write the service file to the desired location. No other configuration
-          await _writeGoogleServiceFileToPath(fullPathToServiceFile!);
-        }
-      }
+        
+      // Write the service file to the desired location. No other configuration
+      await _writeGoogleServiceFileToPath(fullPathToServiceFile!);
+        
     } else {
       // Default setup. Continue to write file to Runner/GoogleService-Info.plist if no "fullPathToServiceFile", "build configuration" and "target" is provided
       // Update "Runner", default target

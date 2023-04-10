@@ -70,22 +70,22 @@ class FirebaseConfigurationFile {
     _writeClass();
     final newFileContents = _stringBuffer.toString();
 
-    if (fileExists && !force) {
-      final existingFileContents = await outputFile.readAsString();
-      // Only prompt overwrite if contents have changed.
-      // Trimming since some IDEs/git auto apply a trailing newline.
-      if (existingFileContents.trim() != newFileContents.trim()) {
-        // If the user chooses this option, they want it overwritten so no need to prompt
-        if (overwriteFirebaseOptions != true) {
-          final shouldOverwrite = promptBool(
-            'Generated FirebaseOptions file ${AnsiStyles.cyan(outputFilePath)} already exists, do you want to override it?',
-          );
-          if (!shouldOverwrite) {
-            throw FirebaseOptionsAlreadyExistsException(outputFilePath);
-          }
-        }
-      }
-    }
+    // if (fileExists && !force) {
+    //   final existingFileContents = await outputFile.readAsString();
+    //   // Only prompt overwrite if contents have changed.
+    //   // Trimming since some IDEs/git auto apply a trailing newline.
+    //   if (existingFileContents.trim() != newFileContents.trim()) {
+    //     // If the user chooses this option, they want it overwritten so no need to prompt
+    //     if (overwriteFirebaseOptions != true) {
+    //       final shouldOverwrite = promptBool(
+    //         'Generated FirebaseOptions file ${AnsiStyles.cyan(outputFilePath)} already exists, do you want to override it?',
+    //       );
+    //       if (!shouldOverwrite) {
+    //         throw FirebaseOptionsAlreadyExistsException(outputFilePath);
+    //       }
+    //     }
+    //   }
+    // }
 
     outputFile.createSync(recursive: true);
     outputFile.writeAsStringSync(_stringBuffer.toString());

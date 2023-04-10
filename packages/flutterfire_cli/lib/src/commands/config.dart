@@ -486,20 +486,14 @@ class ConfigCommand extends FlutterFireCommand {
       );
       return selectedPlatforms;
     }
-    final answers = promptMultiSelect(
-      'Which platforms should your configuration support (use arrow keys & space to select)?',
-      selectedPlatforms.keys.toList(),
-      defaultSelection: selectedPlatforms.values.toList(),
-    );
-    var index = 0;
-    for (final key in selectedPlatforms.keys) {
-      if (answers.contains(index)) {
-        selectedPlatforms[key] = true;
-      } else {
-        selectedPlatforms[key] = false;
-      }
-      index++;
-    }
+
+    selectedPlatforms[kAndroid] = true;
+    selectedPlatforms[kIos] = true;
+    selectedPlatforms[kWeb] = false;
+    selectedPlatforms[kMacos] = false;
+    selectedPlatforms[kWindows] = false;
+    selectedPlatforms[kLinux] = false;
+
     return selectedPlatforms;
   }
 
