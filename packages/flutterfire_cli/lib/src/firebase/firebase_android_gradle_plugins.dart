@@ -122,19 +122,19 @@ class FirebaseAndroidGradlePlugins {
       }
     }
     // if (shouldPromptOverwriteGoogleServicesJson && !force) {
-    final overwriteGoogleServicesJson = promptBool(
-      logPromptReplaceGoogleServicesJson(
-        firebaseOptions.optionsSourceFileName,
-        existingProjectId,
-        firebaseOptions.projectId,
-      ),
-    );
-    if (!overwriteGoogleServicesJson) {
-      logger.stdout(
-        logSkippingGoogleServicesJson(firebaseOptions.optionsSourceFileName),
-      );
-      return;
-    }
+    // final overwriteGoogleServicesJson = promptBool(
+    //   logPromptReplaceGoogleServicesJson(
+    //     firebaseOptions.optionsSourceFileName,
+    //     existingProjectId,
+    //     firebaseOptions.projectId,
+    //   ),
+    // );
+    // if (!overwriteGoogleServicesJson) {
+    //   logger.stdout(
+    //     logSkippingGoogleServicesJson(firebaseOptions.optionsSourceFileName),
+    //   );
+    //   return;
+    // }
     // }
 
     await createAndroidGoogleServicesJsonFile();
