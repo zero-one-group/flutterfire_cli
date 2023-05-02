@@ -121,21 +121,21 @@ class FirebaseAndroidGradlePlugins {
         shouldPromptOverwriteGoogleServicesJson = true;
       }
     }
-    if (shouldPromptOverwriteGoogleServicesJson && !force) {
-      final overwriteGoogleServicesJson = promptBool(
-        logPromptReplaceGoogleServicesJson(
-          firebaseOptions.optionsSourceFileName,
-          existingProjectId,
-          firebaseOptions.projectId,
-        ),
+    // if (shouldPromptOverwriteGoogleServicesJson && !force) {
+    final overwriteGoogleServicesJson = promptBool(
+      logPromptReplaceGoogleServicesJson(
+        firebaseOptions.optionsSourceFileName,
+        existingProjectId,
+        firebaseOptions.projectId,
+      ),
+    );
+    if (!overwriteGoogleServicesJson) {
+      logger.stdout(
+        logSkippingGoogleServicesJson(firebaseOptions.optionsSourceFileName),
       );
-      if (!overwriteGoogleServicesJson) {
-        logger.stdout(
-          logSkippingGoogleServicesJson(firebaseOptions.optionsSourceFileName),
-        );
-        return;
-      }
+      return;
     }
+    // }
 
     await createAndroidGoogleServicesJsonFile();
 
